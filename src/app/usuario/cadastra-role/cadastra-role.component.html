@@ -1,0 +1,47 @@
+<h1 class="mt-4">Segurança</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Cadastro de regra de segurança</li>
+</ol>
+<div class="container">
+    <form #CadRoleform="ngForm" (submit)="onSubmit()">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Usuario: </label>
+                    <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="nomeUsuario">
+                        <option value="">Selecione ...</option>
+                        <option *ngFor="let usuario of usuariosCadastrados" [ngValue]="usuario.username">
+                            {{ usuario.username }}</option>
+                    </select>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Regras: </label>
+                    <select multiple size="10" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="nomeUsuario">
+                        <option value="">Selecione ...</option>
+                        <option *ngFor="let usuario of usuariosCadastrados" [ngValue]="usuario.username">
+                            {{ usuario.username }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-success" type="submit">
+                    <i class="fa fa-save"></i>
+                Salvar</button>
+
+                <button type="button" class="btn btn-danger ml-1" 
+                        routerLink="/servico-prestado">
+                    <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
