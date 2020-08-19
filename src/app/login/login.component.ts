@@ -48,6 +48,7 @@ export class LoginComponent {
     usuario.username = this.username;
     usuario.password = this.password;
     usuario.roles = this.roles;
+    console.log(usuario)
     this.authService.salvar(usuario)
     .subscribe(
       response => {
@@ -58,7 +59,7 @@ export class LoginComponent {
         this.password = null; 
         this.roles = null;       
         this.errors = null;    
-      }, errorResponse => {
+      }, errorResponse => {        
         this.errors = errorResponse.error.errors;
         this.mensagemSucesso = null;
       }
