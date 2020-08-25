@@ -17,7 +17,8 @@ import { HomeComponent } from './home/home.component'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
-import { NotfoundComponent } from './notfound/notfound.component'
+import { NotfoundComponent } from './notfound/notfound.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { NotfoundComponent } from './notfound/notfound.component'
     TemplateModule,
     ClientesModule,
     UsuarioModule,
-    ServicoPrestadoModule
+    ServicoPrestadoModule,
+    BrowserAnimationsModule
   ],
   providers: [
     ClientesService,

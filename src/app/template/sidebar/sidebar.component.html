@@ -11,6 +11,18 @@
                     </div>
                     Home
                 </a>
+                <a class="nav-link collapsed" 
+                    routerLink="/cadastraRole" 
+                    data-toggle="collapse"
+                    data-target="#collapseLayouts" 
+                    aria-expanded="false" 
+                    aria-controls="collapseLayouts"
+                   *ngIf="isMenuVisivel('admin')">
+                    <div class="sb-nav-link-icon">
+                        <i class="fas fa-user-lock"></i>
+                    </div>
+                    Nível de usuário
+                </a>
                 <div class="sb-sidenav-menu-heading">Cadastros</div>
                 <a class="nav-link collapsed" 
                    routerLink="/clientes" 

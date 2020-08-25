@@ -23,12 +23,10 @@ export class AuthGuard implements CanActivate {
 
     const authenticated = this.authService.isAuthenticated();
 
-    if (authenticated) {
+    if (authenticated) {      
       
-      console.log("ROLES: " + next.data.roles);
       if (next.data.roles) {
-        for (let r of next.data.roles) {
-          console.log("ROLE: "+r);
+        for (let r of next.data.roles) {          
           if (this.authService.hasRole(r)) {
             return true;
           }

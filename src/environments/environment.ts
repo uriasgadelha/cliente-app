@@ -8,6 +8,9 @@ export const environment = {
   apiURLClientes: 'http://localhost:8080/api/clientes',
   apiURLServicos: 'http://localhost:8080/api/servicos-prestados',
   apiURLUsuarios: 'http://localhost:8080/api/usuarios',
+  apiURLUsuariosListaUsername: 'http://localhost:8080/api/usuarios/listarUsuarios',
+  apiURLUsuariosListaRoles: 'http://localhost:8080/api/usuarios/listarRolesUsuario',
+  apiURLUsuariosAlteraRoles: 'http://localhost:8080/api/usuarios/alteraRolesUsuario',
   clientId: 'my-angular-app',
   clientSecret: '@321',
   apiURLToken: 'http://localhost:8080/oauth/token'

@@ -3,7 +3,6 @@ import { environment } from './../environments/environment';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { error } from '@angular/compiler/src/util';
 import { JwtHelperService } from '@auth0/angular-jwt'
 
 @Injectable({
@@ -13,12 +12,15 @@ export class AuthService {
 
   urlUSuario: string = environment.apiURLUsuarios;
   urlToken: string = environment.apiURLToken;
+  urlUsuariosListaUsername: string = environment.apiURLUsuariosListaUsername;
+  urlUsuariosListaRoles: string = environment.apiURLUsuariosListaRoles;
+  urlUsuariosAlteraRoles: string = environment.apiURLUsuariosAlteraRoles;
   clientID: string = environment.clientId;
   clientSecret: string = environment.clientSecret;
   jwtHelper: JwtHelperService = new JwtHelperService();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient    
   ) { }
 
   obterToken() {
@@ -88,6 +90,31 @@ export class AuthService {
     return this.http.post(this.urlToken, params.toString(), { headers });
   }
 
+  listarUsuarios() : Observable<string[]> {        
+    return this.http.get<any>(this.urlUsuariosListaUsername);
+  }
+
+  listarRolesUsuario(username: string) : Observable<string[]> {
+
+    let httpParams = new HttpParams()
+    .set("nomeUsuario", username ? username : "")    
+    
+    const urlConsulta = this.urlUsuariosListaRoles + "?" + httpParams.toString();
+    console.log(urlConsulta);
+    return this.http.get<any>(urlConsulta);
+
+   }
+
+   alteraRoles(usuario: string, roles:string): Observable<any> {
+    const params = new HttpParams()
+    .set('nomeUsuario', usuario)
+    .set('rolesUsuario', roles);
+
+    const url = this.urlUsuariosAlteraRoles + "?" + params.toString();
+    console.log(url);
+    return this.http.patch(url, null);
+    
+  }
   // getHeader() : string {
   //   return '{ "Authorization": "Basic " + btoa(`${this.clientID}:${this.clientSecret}`), "Content-Type": "application/x-www-form-urlencoded" }';    
   // }

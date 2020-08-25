@@ -1,6 +1,6 @@
 import { AuthService } from './../../auth.service';
-import { Usuario } from './../../login/usuario';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'cadastra-role',
@@ -9,31 +9,78 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastraRoleComponent implements OnInit {
 
-  usuariosCadastrados : Usuario[] = [];
+  usuariosCadastrados: string[] = [];
   nomeUsuario: string;
-  rolesDisponiveis : string[];
+  rolesUsuario: string[];
+  roleAdmin: boolean;
+  roleCliente: boolean;
+  roleServico: boolean;
 
   constructor(
     private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    const u: Usuario = new Usuario();
-    u.username = 'Usuario1';
-    const u2: Usuario = new Usuario();
-    u2.username = 'Usuario2';
-    this.usuariosCadastrados.push(u);
-    this.usuariosCadastrados.push(u2);
-    console.log(this.usuariosCadastrados);
-  }
-  
-  alteraRoles(usuario: string, roles:string) {
-    console.log(usuario);
-    console.log(roles);
+    this.authService.listarUsuarios()
+      .subscribe(r => {
+        this.usuariosCadastrados = r;
+      })
   }
 
+
+
   onSubmit() {
-    console.log('subiu');
+
+
+
+  }
+
+  adicionaRole(roles: string, role: string): string {    
+
+    if (roles != "") {
+      roles += "," + role;
+    } else {
+      roles = role;
+    }
+
+    return roles;
+  }
+
+  getRolesParaAlterar(): string {
+
+    let roles: string = "";
+    
+    if (this.roleAdmin) {
+      roles = this.adicionaRole(roles, "ADMIN");
+    }
+
+    if (this.roleCliente) {
+      roles = this.adicionaRole(roles, "CLIENTE");
+    }
+
+    if (this.roleServico) {
+      roles = this.adicionaRole(roles, "SERVICO");
+    }
+
+    return roles;
+  }
+
+  alteraRoles() {
+    const rolesParaAlterar = this.getRolesParaAlterar();    
+    this.authService.alteraRoles(this.nomeUsuario, rolesParaAlterar).subscribe(r => console.log("Roles Alteradas"));
+  }
+
+  atualizaRoles() {
+
+    this.authService
+      .listarRolesUsuario(this.nomeUsuario)
+      .subscribe(response => {
+
+        this.rolesUsuario = response;
+        this.roleAdmin = this.rolesUsuario.includes('ADMIN');
+        this.roleCliente = this.rolesUsuario.includes('CLIENTE');
+        this.roleServico = this.rolesUsuario.includes('SERVICO');
+      });
   }
 
 }

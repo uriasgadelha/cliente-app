@@ -1,46 +1,40 @@
-<h1 class="mt-4">Segurança</h1>
+<h1 class="mt-4">Sistema</h1>
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active">Cadastro de regra de segurança</li>
+    <li class="breadcrumb-item active">Cadastro nível de usuário</li>
 </ol>
 <div class="container">
     <form #CadRoleform="ngForm" (submit)="onSubmit()">
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label>Usuario: </label>
-                    <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="nomeUsuario">
-                        <option value="">Selecione ...</option>
-                        <option *ngFor="let usuario of usuariosCadastrados" [ngValue]="usuario.username">
-                            {{ usuario.username }}</option>
-                    </select>
-                </div>
-            </div>
-        </div> 
-        
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label>Regras: </label>
-                    <select multiple size="10" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="nomeUsuario">
-                        <option value="">Selecione ...</option>
-                        <option *ngFor="let usuario of usuariosCadastrados" [ngValue]="usuario.username">
-                            {{ usuario.username }}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Usuários</mat-label>
+            <mat-select [(ngModel)]="nomeUsuario" name="nomeUsuario" (ngModelChange)="atualizaRoles()">
+              <mat-option *ngFor="let usuario of usuariosCadastrados" [value]="usuario" >
+                {{usuario}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+
+
+        <mat-checkbox class="example-margin" name="roleAdmin" [(ngModel)]="roleAdmin">
+            Admin
+        </mat-checkbox>
+        <br>
+        <mat-checkbox class="example-margin" name="roleCliente" [(ngModel)]="roleCliente">
+            Cliente
+        </mat-checkbox>
+        <br>
+        <mat-checkbox class="example-margin" name="roleServico" [(ngModel)]="roleServico">
+            Serviço
+        </mat-checkbox>
 
         <div class="row">
-            <div class="col-md-3">
-                <button class="btn btn-success" type="submit">
+            <div class="col-md-4">
+                <button class="btn btn-success" type="button" (click)="alteraRoles()">
                     <i class="fa fa-save"></i>
-                Salvar</button>
-
-                <button type="button" class="btn btn-danger ml-1" 
-                        routerLink="/servico-prestado">
-                    <i class="fa fa-arrow-alt-circle-left"></i> Voltar
-                </button>
+                    Salvar</button>                
             </div>
         </div>
     </form>

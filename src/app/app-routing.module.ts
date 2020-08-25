@@ -9,9 +9,13 @@ import { HomeComponent } from './home/home.component'
 
 const routes: Routes = [
   
-  { path: 'login', component: LoginComponent },  
-  { path: 'cadastraRole', component: CadastraRoleComponent },  
+  { path: 'login', component: LoginComponent },    
   { path: '', component: LayoutComponent, children:[
+    { path: 'cadastraRole', component: CadastraRoleComponent, canActivate : [AuthGuard], data: {
+      roles: [
+        "ROLE_ADMIN"
+      ]
+    } },  
     { path: 'home', component: HomeComponent, canActivate : [AuthGuard]},
     { path: '', redirectTo: '/home', pathMatch: 'full'},
   ] }  
