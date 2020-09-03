@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: 'clientes', component: LayoutComponent, canActivate: [AuthGuard], data: {
       roles: [
-        "ROLE_CLIENTE","ROLE_ADMIN"
+        "ROLE_CLIENTE","ROLE_ADMIN", "ROLE_SERVICO"
       ]
     }, children: [
       { path: 'form', component: ClientesFormComponent },
