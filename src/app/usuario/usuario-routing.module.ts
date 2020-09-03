@@ -8,9 +8,7 @@ import { UsuarioListaComponent } from './usuario-lista/usuario-lista.component';
 const routes: Routes = [
   {
     path: 'usuario', component: LayoutComponent, canActivate: [AuthGuard], data: {
-      roles: [
-        "ROLE_ADMIN"
-      ]
+      roles: ["ROLE_ADMIN"]
     }, children: [
       { path: 'form', component: UsuarioFormComponent },
       { path: 'form/:id', component: UsuarioFormComponent },
