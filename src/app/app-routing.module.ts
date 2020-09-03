@@ -1,4 +1,3 @@
-import { CadastraRoleComponent } from './usuario/cadastra-role/cadastra-role.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthGuard } from './auth.guard';
 import { LayoutComponent } from './layout/layout.component';
@@ -10,12 +9,7 @@ import { HomeComponent } from './home/home.component'
 const routes: Routes = [
   
   { path: 'login', component: LoginComponent },    
-  { path: '', component: LayoutComponent, children:[
-    { path: 'cadastraRole', component: CadastraRoleComponent, canActivate : [AuthGuard], data: {
-      roles: [
-        "ROLE_ADMIN"
-      ]
-    } },  
+  { path: '', component: LayoutComponent, children:[     
     { path: 'home', component: HomeComponent, canActivate : [AuthGuard]},
     { path: '', redirectTo: '/home', pathMatch: 'full'},
   ] }  

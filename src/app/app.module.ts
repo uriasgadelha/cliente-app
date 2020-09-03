@@ -20,6 +20,8 @@ import { LayoutComponent } from './layout/layout.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
+import { UsuarioService } from './usuario/usuario.service';
+
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     ClientesService,
     ServicoPrestadoService,
     AuthService,
+    UsuarioService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

@@ -13,7 +13,8 @@ export const environment = {
   apiURLUsuariosAlteraRoles: 'http://localhost:8080/api/usuarios/alteraRolesUsuario',
   clientId: 'my-angular-app',
   clientSecret: '@321',
-  apiURLToken: 'http://localhost:8080/oauth/token'
+  apiURLToken: 'http://localhost:8080/oauth/token',
+  roles: 'ADMIN,SERVICO,CLIENTE,VENDEDOR'
 };
 
 /*

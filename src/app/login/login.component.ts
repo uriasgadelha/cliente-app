@@ -1,5 +1,4 @@
 import { AuthService } from './../auth.service';
-import { Usuario } from './usuario';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 
@@ -12,8 +11,6 @@ export class LoginComponent {
 
   username: string;
   password: string;   
-  roles: string;
-  cadastrando: boolean;
   mensagemSucesso: string;
   errors: String[];
 
@@ -32,39 +29,6 @@ export class LoginComponent {
     }, errorResponse => {
       this.errors = ['Usuário ou Senha inválidos!']
     })    
-  }
-
-  preparaCadastrar(event){
-    event.preventDefault();
-    this.cadastrando = true;
-  }
-
-  cancelaCadastro(){
-    this.cadastrando = false;
-  }
-
-  cadastrar(){
-    const usuario: Usuario = new Usuario();
-    usuario.username = this.username;
-    usuario.password = this.password;
-    usuario.roles = this.roles;
-    console.log(usuario)
-    this.authService.salvar(usuario)
-    .subscribe(
-      response => {
-    
-        this.mensagemSucesso = "Usuário criado com sucesso";    
-        this.cadastrando = false;
-        this.username = null;
-        this.password = null; 
-        this.roles = null;       
-        this.errors = null;    
-      }, errorResponse => {        
-        this.errors = errorResponse.error.errors;
-        this.mensagemSucesso = null;
-      }
-    )
-
   }
 
 }

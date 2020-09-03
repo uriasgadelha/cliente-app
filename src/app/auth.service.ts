@@ -1,4 +1,3 @@
-import { Usuario } from './login/usuario';
 import { environment } from './../environments/environment';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -47,7 +46,6 @@ export class AuthService {
   getRoles(): string[]{
     const token = this.obterToken();
     if (token) {  
-      console.log(this.jwtHelper.decodeToken(token).authorities);
       return this.jwtHelper.decodeToken(token).authorities;
     }
     return null;    
@@ -70,10 +68,6 @@ export class AuthService {
     return false;
   }
 
-  salvar(usuario: Usuario): Observable<any> {    
-    return this.http.post<any>(this.urlUSuario, usuario);    
-  }
-
   tentarLogar(username: string, password: string): Observable<any> {
 
     const params = new HttpParams()
@@ -86,12 +80,7 @@ export class AuthService {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
 
-
     return this.http.post(this.urlToken, params.toString(), { headers });
-  }
-
-  listarUsuarios() : Observable<string[]> {        
-    return this.http.get<any>(this.urlUsuariosListaUsername);
   }
 
   listarRolesUsuario(username: string) : Observable<string[]> {
@@ -99,8 +88,7 @@ export class AuthService {
     let httpParams = new HttpParams()
     .set("nomeUsuario", username ? username : "")    
     
-    const urlConsulta = this.urlUsuariosListaRoles + "?" + httpParams.toString();
-    console.log(urlConsulta);
+    const urlConsulta = this.urlUsuariosListaRoles + "?" + httpParams.toString();    
     return this.http.get<any>(urlConsulta);
 
    }
@@ -110,8 +98,7 @@ export class AuthService {
     .set('nomeUsuario', usuario)
     .set('rolesUsuario', roles);
 
-    const url = this.urlUsuariosAlteraRoles + "?" + params.toString();
-    console.log(url);
+    const url = this.urlUsuariosAlteraRoles + "?" + params.toString();    
     return this.http.patch(url, null);
     
   }
